@@ -1,0 +1,8 @@
+com\springjpa\springjpa\controller\StudentController.class
+com\springjpa\springjpa\service\StudentService.class
+com\springjpa\springjpa\model\Student.class
+com\springjpa\springjpa\model\Student$StudentBuilder.class
+com\springjpa\springjpa\service\IStudentService.class
+com\springjpa\springjpa\dao\StudentRepository.class
+com\springjpa\springjpa\dto\StudentJsonDTO.class
+com\springjpa\springjpa\SpringjpaApplication.class
