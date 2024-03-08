@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,9 +24,16 @@ public class StudentController {
 
     private static final String NAME_PARAM = "student_name";
     private static final String AGE_PARAM = "student_age";
+    private static final String HONOR_PARAM = "student_honor";
 
     @Autowired
     private IStudentService studentService;
+
+    private List<StudentJsonDTO> convertAccountsToDTO(Page<Student> students) {
+        return students.stream()
+                .map(StudentJsonDTO::new)
+                .collect(Collectors.toList());
+    }
 
     @GetMapping
     public List<StudentJsonDTO> getStudents(
@@ -43,10 +48,18 @@ public class StudentController {
         return convertAccountsToDTO(studentService.getAll(pageable, filterMap));
     }
 
-    private List<StudentJsonDTO> convertAccountsToDTO(Page<Student> students) {
-        return students.stream()
-                .map(StudentJsonDTO::new)
-                .collect(Collectors.toList());
+    @GetMapping("/studentByHonor")
+    public Integer getStudentsByHonor(
+            @RequestParam(value = HONOR_PARAM, required = false) String honor) {
+
+        return studentService.getStudentsByHonor(honor);
+    }
+
+    @GetMapping("/countByAge")
+    public Integer getTotalStudentsByAge(
+            @RequestParam(value = AGE_PARAM, required = false) Integer age) {
+
+        return studentService.getCountByAge(age);
     }
 
 }

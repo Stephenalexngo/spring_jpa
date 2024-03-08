@@ -13,10 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springjpa</name>
 	<description>Spring Boot with Jpa</description>
+
 	<properties>
 		<java.version>17</java.version>
 		<flyway.version>9.22.3</flyway.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,5 +28,15 @@ public class StudentService implements IStudentService {
         }
 
         return studentRepository.findAll(pageable);
+    }
+
+    @Override
+    public Integer getStudentsByHonor(String honor) {
+        return studentRepository.findByHonor(honor);
+    }
+
+    @Override
+    public Integer getCountByAge(Integer age) {
+        return studentRepository.getTotalByAge(age);
     }
 }
